@@ -9,7 +9,16 @@ app.use(cors());
 app.use(express.json());
 app.use("/record", records);
 
+// middleware
+app.use(express.json());
+app.use((err, req, res, next) => {
+    console.error(req.path, req,method);
+    next();
+});
+
 // start the Express server;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 });
+
+// Use 'npm start' in terminal to start Express server
