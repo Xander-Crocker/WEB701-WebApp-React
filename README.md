@@ -6,7 +6,7 @@ use the command 'npm i'
 
 To start the web app with Nodemon; in the terminal use the following command:
 Note: you must be in the server file directory in a bash terminal.
-=======
+
 use the command 'npm i'
 
 To start the web app with Nodemon; in the terminal use the following command: Note: you must be in the server file directory in a bash terminal.
