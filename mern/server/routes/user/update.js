@@ -11,7 +11,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const user_router = express.Router();
 
 // Connection to the data.json file
-const dataFilePath = path.join(__dirname, "../../db/test_data.json");
+// const dataFilePath = path.join(__dirname, "../../db/test_data.json");
 
 // Function to read data from the JSON file
 const readData = () => {

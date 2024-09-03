@@ -1,7 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-// requires change to empty string and import the .env file (not working)
-const uri = process.env.ATLAS_URI || "mongodb+srv://xandercrocker:Password1@web701.ajrfj5p.mongodb.net/?retryWrites=true&w=majority&appName=WEB701";
+// connection string for MongoDB Atlas
+const uri = process.env.ATLAS_URI || "mongodb://localhost:27017";
 
 
 const client = new MongoClient(uri, {
