@@ -24,6 +24,7 @@ try {
         console.error(err);
 }
 
-let db = client.db("employees");
+// Select the database that will be used when data is stored
+let db = client.db("users");
 
 export default db;

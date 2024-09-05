@@ -1,14 +1,19 @@
 # WEB701-WebApp
 
-Use the 'dev' branch for API testing.
+Install packages:
 
-use the command 'npm i' 
+In the terminal navigate to the mern folder and run the command to install the packages:
 
-To start the web app with Nodemon; in the terminal use the following command:
-Note: you must be in the server file directory in a bash terminal.
+npm i
 
-use the command 'npm i'
+Starting MongoDB:
 
-To start the web app with Nodemon; in the terminal use the following command: Note: you must be in the server file directory in a bash terminal.
+In the terminal navigate to the server folder and run the following command to connect to MongoDB: 
 
-npm start
+node --env-file=config.env server
+
+Starting LocalHost:
+
+In another terminal navigate to the client folder and run the following command to start the local host:
+
+npm run dev

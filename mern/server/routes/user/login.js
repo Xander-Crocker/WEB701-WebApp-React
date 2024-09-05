@@ -30,10 +30,5 @@ user_router.post("/login", (req, res) => {
         res.status(401).json({ message: "Invalid credentials" });
     }
 });
-// to test the route, use POST http://localhost:5050/api/user/login in thunder client with the below Json data in the body
-// {
-//     "username": "Node",
-//     "password": "node"
-// }
 
 export default user_router;
