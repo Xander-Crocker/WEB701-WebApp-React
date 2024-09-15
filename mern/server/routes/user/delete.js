@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 const user_router = express.Router();
 
 // This section will help you delete a record
-user_router.delete("/update/:id", async (req, res) => {
+user_router.delete("/delete/:id", async (req, res) => {
     try {
         const query = { _id: new ObjectId(req.params.id) };
 

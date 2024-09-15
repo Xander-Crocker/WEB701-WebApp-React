@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 const Record = (props) => (
     <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
         <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-            {props.record.name}
+            {props.record.username}
         </td>
         <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-            {props.record.position}
+            {props.record.password}
         </td>
         <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-            {props.record.level}
+            {props.record.admin}
         </td>
         <td className="p-4 align-middle [&:has([role=checkbox])]:pr-0">
             <div className="flex gap-2">
@@ -38,9 +38,9 @@ const Record = (props) => (
 
 Record.propTypes = {
     record: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        position: PropTypes.string.isRequired,
-        level: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
+        admin: PropTypes.bool.isRequired,
         _id: PropTypes.string.isRequired,
     }).isRequired,
     deleteRecord: PropTypes.func.isRequired,
@@ -67,7 +67,7 @@ export default function RecordList() {
 
     // This method will delete a record
     async function deleteRecord(id) {
-        await fetch(`http://localhost:5050/api/user/${id}`, {
+        await fetch(`http://localhost:5050/api/user/delete/${id}`, {
             method: "DELETE",
         });
         const newRecords = records.filter((el) => el._id !== id);
@@ -87,23 +87,23 @@ export default function RecordList() {
         });
     }
 
-  // This following section will display the table with the records of individuals.
+    // This following section will display the table with the records of individuals.
     return (
         <>
-        <h3 className="text-lg font-semibold p-4">Employee Records</h3>
+        <h3 className="text-lg font-semibold p-4">User Records</h3>
         <div className="border rounded-lg overflow-hidden">
             <div className="relative w-full overflow-auto">
                 <table className="w-full caption-bottom text-sm">
                     <thead className="[&_tr]:border-b">
                         <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                             <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                                Name
+                                Username
                             </th>
                             <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                                Position
+                                Password
                             </th>
                             <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                                Level
+                                Admin
                             </th>
                             <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
                                 Action

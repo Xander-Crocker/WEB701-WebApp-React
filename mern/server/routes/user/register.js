@@ -8,9 +8,9 @@ const user_router = express.Router();
 user_router.post("/register", async (req, res) => {
     try {
         let newDocument = {
-            name: req.body.name,
-            position: req.body.position,
-            level: req.body.level,
+            username: req.body.username,
+            password: req.body.password,
+            admin: req.body.admin
         };
         let collection = await db.collection("records");
         let result = await collection.insertOne(newDocument);

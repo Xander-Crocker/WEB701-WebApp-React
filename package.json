@@ -1,5 +1,12 @@
 {
   "dependencies": {
-    "prop-types": "^15.8.1"
+    "@hookform/resolvers": "^3.9.0",
+    "prop-types": "^15.8.1",
+    "react-hook-form": "^7.53.0",
+    "typescript": "^5.5.4",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4"
   }
 }

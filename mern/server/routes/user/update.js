@@ -11,9 +11,9 @@ user_router.patch("/update/:id", async (req, res) => {
         const query = { _id: new ObjectId(req.params.id) };
         const updates = {
             $set: {
-                name: req.body.name,
-                position: req.body.position,
-                level: req.body.level,
+                username: req.body.username,
+                password: req.body.password,
+                admin: req.body.admin
             },
         };
         let collection = await db.collection("records");
