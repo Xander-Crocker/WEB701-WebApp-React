@@ -3,7 +3,6 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 // connection string for MongoDB Atlas
 const uri = process.env.ATLAS_URI || "mongodb://localhost:27017";
 
-
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -25,6 +24,6 @@ try {
 }
 
 // Select the database that will be used when data is stored
-let db = client.db("users");
+let db = client.db("records");
 
 export default db;

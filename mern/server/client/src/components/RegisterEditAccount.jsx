@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function Record() {
+    // This state will hold the form data.
     const [form, setForm] = useState({
         username: "",
         password: "",
@@ -12,6 +13,7 @@ export default function Record() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // This function will fetch the record if the id is present in the URL.
         async function fetchData() {
             const id = params.id?.toString() || undefined;
             if(!id) return;
@@ -94,8 +96,7 @@ export default function Record() {
                     User Info
                     </h2>
                     <p className="mt-1 text-sm leading-6 text-slate-600">
-                    This information will be displayed publicly so be careful what you
-                    share.
+                    This information will be displayed publicly so be careful what you share.
                     </p>
                 </div>
 
@@ -175,7 +176,7 @@ export default function Record() {
                     value="Save User"
                     className="inline-flex items-center justify-center whitespace-nowrap text-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-slate-100 hover:text-accent-foreground h-9 rounded-md px-3 cursor-pointer mt-4"
                 />
-            </form>
-            </>
+        </form>
+        </>
     );
 }
