@@ -78,7 +78,7 @@ export default function Record() {
                 console.error('A problem occurred with your fetch operation: ', error);
             } finally {
                 setForm({ username: "", password: "" , admin: "" });
-                navigate("/");
+                navigate("/login");
             }
     }
 

@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+    const navigate = useNavigate();
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -37,13 +39,14 @@ const LoginForm = () => {
             console.log(data);
             setSuccess(true);
             console.log('Login successful');
+            // Redirect the user to the home page
+            navigate("/");
             
         } catch (error) {
             // Handle any errors
             setError(error.message);
             console.error(error);
         }
-
         // Reset the form
         setUsername('');
         setPassword('');
