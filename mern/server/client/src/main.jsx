@@ -8,6 +8,7 @@ import App from "./App";
 import Register from "./components/RegisterEditAccount";
 import RecordList from "./components/RecordList";
 import LoginForm from "./components/LoginForm";
+import Home from "./components/Home";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -17,6 +18,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+    ],
+  },
+  {
+    path: "/records",
+    element: <App />,
+    children: [
+      {
+        path: "/records",
         element: <RecordList />,
       },
     ],
