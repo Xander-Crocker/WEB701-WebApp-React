@@ -1,7 +1,9 @@
 import { useState, //useContext 
     } from 'react';
 import { useNavigate } from "react-router-dom";
-// use auth service for validation
+
+// use auth service or auth context for validation
+//import { AuthContext } from '../../../services/AuthContext';
 //import { AuthService } from '../../../services/AuthService';
 
 const LoginForm = () => {
@@ -10,6 +12,7 @@ const LoginForm = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+
     // Use login function from AuthContext
     //const { login } = useContext(AuthContext); 
 
@@ -28,7 +31,7 @@ const LoginForm = () => {
         // Reset success state
         setSuccess(false); 
 
-        // Use the login function from AuthService
+        // NOTE: Use the login function from AuthService
         try {
             const response = await fetch('http://localhost:5050/api/user/login', {
                 method: 'POST',
@@ -47,11 +50,11 @@ const LoginForm = () => {
             // Handle the response data
             console.log(data);
             setSuccess(true);
-            //console.log('Login successful');
+            console.log('Login successful');
 
-            // Redirect the user to the page with admin access
-            navigate("/records");
-            window.location.reload();
+            // Redirect user to home page
+            navigate("/");
+            //window.location.reload();
             
         } catch (error) {
             // Handle any errors

@@ -1,25 +1,24 @@
 import React, { createContext, useState, useEffect } from 'react';
-//import * as jwtDecode from 'jwt-decode';
-//import jwt from 'jsonwebtoken';
-//import axios from 'axios';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
+    // NOTE: 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        // Ensure token is a valid JWT
-        // if (token && typeof token === 'string' && token.split('.').length === 3) { 
-        //     try {
-        //         // const decoded = jwtDecode.default(token); 
-        //         setUser(token);
-        //         console.log("Here is the token>>"+token);  
-        //     } catch (error) {
-        //         console.error('Failed to decode token', error);
-        //     } 
-        // }
+        //Ensure token is a valid JWT
+        if (token && typeof token === 'string' && token.split('.').length === 3) { 
+            try {
+                
+                setUser(token);
+                console.log("Here is the token>>"+token);  
+            } catch (error) {
+                console.error('Failed to decode token', error);
+            } 
+        }
     }, []);
 
     const login = (token) => {
@@ -28,6 +27,7 @@ const AuthProvider = ({ children }) => {
         if (token && typeof token === 'string' && token.split('.').length === 3) { 
             localStorage.setItem('token', token);
             try {
+                
                 setUser(token);
             } catch (error) {
                 console.error('Not able to set user token', error);
