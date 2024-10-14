@@ -1,6 +1,8 @@
-import { useState, useContext } from 'react';
+import { useState, //useContext 
+    } from 'react';
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from '../../../jwt-auth/AuthContext';
+// use auth service for validation
+//import { AuthService } from '../../../services/AuthService';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -9,7 +11,7 @@ const LoginForm = () => {
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
     // Use login function from AuthContext
-    const { login } = useContext(AuthContext); 
+    //const { login } = useContext(AuthContext); 
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -25,6 +27,8 @@ const LoginForm = () => {
         setError(null); 
         // Reset success state
         setSuccess(false); 
+
+        // Use the login function from AuthService
         try {
             const response = await fetch('http://localhost:5050/api/user/login', {
                 method: 'POST',
@@ -43,11 +47,11 @@ const LoginForm = () => {
             // Handle the response data
             console.log(data);
             setSuccess(true);
-            console.log('Login successful');
-            // Store the JWT token
-            login(data.token);
+            //console.log('Login successful');
+
             // Redirect the user to the page with admin access
             navigate("/records");
+            window.location.reload();
             
         } catch (error) {
             // Handle any errors

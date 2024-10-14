@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AuthProvider } from '../../jwt-auth/AuthContext';
-import ProtectedRoute from '../../jwt-auth/ProtectedRoute';
+import { AuthProvider } from '../../services/AuthContext';
+import ProtectedRoute from '../../services/ProtectedRoute';
+
 import App from './App';
 import Register from './components/RegisterEditAccount';
 import RecordList from './components/RecordList';
