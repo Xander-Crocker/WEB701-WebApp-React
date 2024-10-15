@@ -1,20 +1,19 @@
-import { useState, //useContext 
-    } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useState, useContext } from 'react';
+//import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../../services/AuthContext';
 
-// use auth service or auth context for validation
-//import { AuthContext } from '../../../services/AuthContext';
-//import { AuthService } from '../../../services/AuthService';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
-    const navigate = useNavigate();
+    
+    //const navigate = useNavigate();
 
     // Use login function from AuthContext
-    //const { login } = useContext(AuthContext); 
+    const { login } = useContext(AuthContext); 
 
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -24,47 +23,64 @@ const LoginForm = () => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = async (e) => {
+    // NOTE: new code
+    const handleSubmit = (e) => {
         e.preventDefault();
         // Reset error state
         setError(null); 
         // Reset success state
         setSuccess(false); 
 
-        // NOTE: Use the login function from AuthService
-        try {
-            const response = await fetch('http://localhost:5050/api/user/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
+        login(username, password);
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Login failed');
-            }
-
-            const data = await response.json();
-            // Handle the response data
-            console.log(data);
-            setSuccess(true);
-            console.log('Login successful');
-
-            // Redirect user to home page
-            navigate("/");
-            //window.location.reload();
-            
-        } catch (error) {
-            // Handle any errors
-            setError(error.message);
-            console.error(error);
-        }
-        // Reset the form
-        setUsername('');
-        setPassword('');
+        // Redirect user to home page
+        //navigate("/");
+        //window.location.reload();
     };
+
+    // NOTE: old code
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     // Reset error state
+    //     setError(null); 
+    //     // Reset success state
+    //     setSuccess(false); 
+
+    //     // NOTE: Use the login function from AuthService
+    //     try {
+    //         const response = await fetch('http://localhost:5050/api/user/login', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ username, password }),
+    //         });
+
+    //         if (!response.ok) {
+    //             const errorData = await response.json();
+    //             throw new Error(errorData.message || 'Login failed');
+    //         }
+
+    //         const data = await response.json();
+    //         // Handle the response data
+    //         console.log(data);
+    //         setSuccess(true);
+    //         console.log('Login successful');
+
+    //         // Redirect user to home page
+    //         navigate("/");
+    //         //window.location.reload();
+            
+    //     } catch (error) {
+    //         // Handle any errors
+    //         setError(error.message);
+    //         console.error(error);
+    //     }
+    //     // Reset the form
+    //     setUsername('');
+    //     setPassword('');
+    // };
 
     return (
         <form onSubmit={handleSubmit}>
@@ -123,6 +139,7 @@ const LoginForm = () => {
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>Login successful!</p>}
+
             <input
                 type="submit"
                 value="Login"

@@ -1,4 +1,8 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import mongoose from 'mongoose';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // connection string for MongoDB Atlas
 const uri = process.env.ATLAS_URI || "mongodb://localhost:27017";
@@ -11,19 +15,17 @@ const client = new MongoClient(uri, {
     },
 });
 
-try {
-    // Connect the client to the server
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-        "Pinged your deployment. You successfully connected to MongoDB!"
-    );
-    } catch(err) {
-        console.error(err);
-}
+const initializeDB = async () => {
+    try {
+        await mongoose.connect(uri);
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        process.exit(1); // Exit process with failure
+    }
+};
 
 // Select the database that will be used when data is stored
-let db = client.db("records");
+const db = client.db("records");
 
-export default db;
+export default { initializeDB, db };

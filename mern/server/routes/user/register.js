@@ -1,6 +1,6 @@
 // Modules
 import express from "express";
-import db from "../../db/connection.js";
+import dbConnection from "../../db/connection.js";
 
 const user_router = express.Router();
 
@@ -12,7 +12,7 @@ user_router.post("/register", async (req, res) => {
             password: req.body.password,
             admin: req.body.admin
         };
-        let collection = await db.collection("records");
+        let collection = await dbConnection.db.collection("records");
         let result = await collection.insertOne(newDocument);
         res.send(result).status(204);
     } catch (err) {
