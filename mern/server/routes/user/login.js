@@ -4,6 +4,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import User from "../../../models/userModel.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // old import
 // import db from "../../db/connection.js";
@@ -15,17 +18,18 @@ user_router.post('/login', async (req, res) => {
 
     try {
         const { username, password } = req.body;
-        console.log('Received login request:', { username, password }); // Debugging line
+        console.log('Received login request:', { username, password });
 
-        // Use Mongoose method to find the user
-        //const user1 = await db.collection('records').findOne({ username, password });
-        const user = await User.findOne({ username }).exec();
+        console.log('Attempting to find user in database...');
+        const user = await User.findOne({ username }).maxTimeMS(5000);
+        console.log('Database query completed.');
+        
         if (!user) {
             console.error('User not found');
             return res.status(400).send('Invalid credentials');
         }
 
-        console.log('User found:', user); // Debugging line
+        console.log('User found:', user); 
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
@@ -33,14 +37,14 @@ user_router.post('/login', async (req, res) => {
             return res.status(400).send('Invalid credentials');
         }
 
-        console.log('Password matches'); // Debugging line
+        console.log('Password matches'); 
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        console.log('Generated token:', token); // Debugging line
+        console.log('Generated token:', token); 
 
         res.json({ token });
     } catch (error) {
-        console.error('Error during login:', error.stack); // Log the error stack trace
+        console.error('Error during login:', error.stack); // Seem to be hitting this error
         res.status(500).send('Internal server error');
     }
 

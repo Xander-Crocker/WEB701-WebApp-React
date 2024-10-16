@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
         setError(null);
         try {
             const res = await axios.post('/login', { username, password });
-            console.log('API Response:', res.data); // Debugging line
+            console.log('API Response:', res.data);
             const { token } = res.data;
             if (token) {
                 localStorage.setItem('token', token);
@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
                 setUser(token);
             } else {
                 console.error('Token is undefined in the response');
-                console.log('Full API Response:', res); // Log the full response for debugging
+                console.log('Full API Response:', res); // Log the full response
                 setError('Login failed. No token received.');
             }
         } catch (error) {

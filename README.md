@@ -1,19 +1,23 @@
-# WEB701-WebApp
+# WEB701-WebApp-React-Prototype
 
-Install packages:
+### Create three terminals. Copy and paste.
 
-In the terminal navigate to the mern folder and run the command to install the packages:
+### Terminal 1:
 
 npm i
 
-Starting MongoDB:
+### Terminal 2:
 
-In the terminal navigate to the server folder and run the following command to connect to MongoDB: 
+cd mern/server
+
+npm i
 
 node --env-file=config.env server
 
-Starting LocalHost:
+### Terminal 3:
 
-In another terminal navigate to the client folder and run the following command to start the local host:
+cd mern/client
+
+npm i
 
 npm run dev
